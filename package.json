@@ -1,0 +1,18 @@
+{
+  "name": "stripe-recovery-mvp",
+  "version": "1.0.0",
+  "description": "AI-powered soft decline recovery for Stripe subscriptions",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "node scripts/build.js && wrangler dev dist/index.js",
+    "build": "node scripts/build.js",
+    "deploy": "node scripts/build.js && wrangler deploy dist/index.js",
+    "test": "node scripts/test-webhook.js"
+  },
+  "keywords": ["stripe", "payments", "recovery", "ai", "saas"],
+  "author": "Anchovy Labs",
+  "license": "MIT",
+  "devDependencies": {
+    "wrangler": "^3.0.0"
+  }
+}

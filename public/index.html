@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stripe Recovery - AI-Powered Soft Decline Recovery</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    header {
+      text-align: center;
+      padding: 60px 20px;
+      color: white;
+    }
+    
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+    
+    .subtitle {
+      font-size: 1.5rem;
+      opacity: 0.9;
+      margin-bottom: 40px;
+    }
+    
+    .cta-button {
+      display: inline-block;
+      background: white;
+      color: #667eea;
+      padding: 15px 40px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: transform 0.2s;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    
+    .cta-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    }
+    
+    .content {
+      background: white;
+      border-radius: 20px;
+      padding: 60px 40px;
+      margin: -40px auto 60px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    }
+    
+    .problem {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    
+    .stat {
+      display: inline-block;
+      margin: 20px 30px;
+      text-align: center;
+    }
+    
+    .stat-number {
+      font-size: 3rem;
+      font-weight: 700;
+      color: #667eea;
+      display: block;
+    }
+    
+    .stat-label {
+      color: #666;
+      font-size: 1rem;
+    }
+    
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin: 60px 0;
+    }
+    
+    .feature {
+      text-align: center;
+      padding: 30px;
+      border-radius: 10px;
+      background: #f8f9fa;
+    }
+    
+    .feature-icon {
+      font-size: 3rem;
+      margin-bottom: 15px;
+    }
+    
+    .feature h3 {
+      margin-bottom: 10px;
+      color: #667eea;
+    }
+    
+    .roi-calculator {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 60px 40px;
+      border-radius: 20px;
+      margin: 60px 0;
+    }
+    
+    .roi-calculator h2 {
+      text-align: center;
+      margin-bottom: 40px;
+      font-size: 2rem;
+    }
+    
+    .calculator-inputs {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    
+    .input-group {
+      margin-bottom: 25px;
+    }
+    
+    .input-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+    
+    .input-group input {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+    
+    .calculator-results {
+      max-width: 600px;
+      margin: 40px auto 0;
+      background: rgba(255,255,255,0.1);
+      padding: 30px;
+      border-radius: 10px;
+      backdrop-filter: blur(10px);
+    }
+    
+    .result-row {
+      display: flex;
+      justify-content: space-between;
+      margin: 15px 0;
+      font-size: 1.1rem;
+    }
+    
+    .result-highlight {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #FFD700;
+      text-align: center;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 2px solid rgba(255,255,255,0.3);
+    }
+    
+    .pricing {
+      text-align: center;
+      margin: 60px 0;
+    }
+    
+    .price {
+      font-size: 3rem;
+      font-weight: 700;
+      color: #667eea;
+    }
+    
+    .price-details {
+      color: #666;
+      margin: 10px 0;
+    }
+    
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>💰 Stripe Recovery</h1>
+      <p class="subtitle">Stop losing 20-40% of your revenue to soft declines</p>
+      <a href="#calculator" class="cta-button">Calculate Your Savings</a>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="content">
+      <div class="problem">
+        <h2>The Hidden Revenue Leak</h2>
+        <p style="font-size: 1.2rem; margin: 20px 0; color: #666;">
+          Every month, thousands of dollars slip through your fingers due to "soft declines" - 
+          temporary payment failures that could be recovered with the right approach.
+        </p>
+        
+        <div style="margin-top: 40px;">
+          <div class="stat">
+            <span class="stat-number">20-40%</span>
+            <span class="stat-label">of trials fail at conversion</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">$2K+</span>
+            <span class="stat-label">lost per month (average SaaS)</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">84%</span>
+            <span class="stat-label">ignore standard dunning emails</span>
+          </div>
+        </div>
+      </div>
+
+      <h2 style="text-align: center; margin: 60px 0 40px; font-size: 2rem;">How It Works</h2>
+      
+      <div class="features">
+        <div class="feature">
+          <div class="feature-icon">🎯</div>
+          <h3>Smart Detection</h3>
+          <p>Automatically identifies soft declines (insufficient funds, temporary issues) and ignores hard declines.</p>
+        </div>
+        
+        <div class="feature">
+          <div class="feature-icon">🤖</div>
+          <h3>AI Messages</h3>
+          <p>Generates personalized, human-sounding messages - not robotic templates.</p>
+        </div>
+        
+        <div class="feature">
+          <div class="feature-icon">💬</div>
+          <h3>WhatsApp + SMS</h3>
+          <p>Reaches customers where they actually check messages, not buried in email spam.</p>
+        </div>
+        
+        <div class="feature">
+          <div class="feature-icon">✅</div>
+          <h3>Activity Check</h3>
+          <p>Only messages active users who are still using your product.</p>
+        </div>
+        
+        <div class="feature">
+          <div class="feature-icon">📊</div>
+          <h3>Recovery Dashboard</h3>
+          <p>Track failed payments, messages sent, and recovered revenue in real-time.</p>
+        </div>
+        
+        <div class="feature">
+          <div class="feature-icon">⚡</div>
+          <h3>Instant Setup</h3>
+          <p>5-minute integration. Add webhook URL to Stripe, configure Twilio, done.</p>
+        </div>
+      </div>
+
+      <div id="calculator" class="roi-calculator">
+        <h2>💎 ROI Calculator</h2>
+        
+        <div class="calculator-inputs">
+          <div class="input-group">
+            <label>Monthly Subscription Revenue ($)</label>
+            <input type="number" id="revenue" value="10000" min="0" step="1000">
+          </div>
+          
+          <div class="input-group">
+            <label>Average Subscription Price ($)</label>
+            <input type="number" id="avgPrice" value="50" min="0" step="10">
+          </div>
+          
+          <div class="input-group">
+            <label>Estimated Failed Payment Rate (%)</label>
+            <input type="number" id="failRate" value="25" min="0" max="100" step="5">
+          </div>
+          
+          <div class="input-group">
+            <label>Expected Recovery Rate with AI Messages (%)</label>
+            <input type="number" id="recoveryRate" value="40" min="0" max="100" step="5">
+          </div>
+        </div>
+        
+        <div class="calculator-results">
+          <div class="result-row">
+            <span>Lost to failed payments (monthly):</span>
+            <strong id="lostRevenue">$2,500</strong>
+          </div>
+          <div class="result-row">
+            <span>Potential recovered revenue:</span>
+            <strong id="recoveredRevenue">$1,000</strong>
+          </div>
+          <div class="result-row">
+            <span>Stripe Recovery cost:</span>
+            <strong id="cost">$69</strong>
+          </div>
+          
+          <div class="result-highlight">
+            Net Monthly Gain: <span id="netGain">$931</span>
+          </div>
+          <div style="text-align: center; margin-top: 10px; opacity: 0.9;">
+            Annual savings: <span id="annualGain">$11,172</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pricing">
+        <h2 style="margin-bottom: 30px;">Simple, Performance-Based Pricing</h2>
+        <div class="price">$19/mo</div>
+        <div class="price-details">+ 5% of recovered revenue</div>
+        <p style="margin: 20px 0; color: #666; max-width: 600px; margin-left: auto; margin-right: auto;">
+          You only pay extra when we recover money for you. If we don't recover anything, 
+          you only pay the base $19. No long-term contracts, cancel anytime.
+        </p>
+        <a href="mailto:ezra@anchovylabs.ai?subject=Stripe Recovery Beta Access" class="cta-button" style="margin-top: 20px;">
+          Request Beta Access
+        </a>
+      </div>
+
+      <div style="background: #f8f9fa; padding: 40px; border-radius: 10px; margin: 60px 0;">
+        <h2 style="text-align: center; margin-bottom: 30px;">Why This Works Better</h2>
+        
+        <div style="max-width: 700px; margin: 0 auto;">
+          <p style="margin: 15px 0;"><strong>❌ Standard Stripe Dunning:</strong> Generic emails, end up in spam, 84% ignored</p>
+          <p style="margin: 15px 0;"><strong>❌ Other Tools:</strong> Email-only, robotic templates, treat all declines the same</p>
+          <p style="margin: 15px 0;"><strong>✅ Stripe Recovery:</strong> WhatsApp/SMS, AI-personalized, smart soft-decline focus, activity checks</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>Built by <a href="https://anchovylabs.ai" style="color: white; text-decoration: none; font-weight: 600;">Anchovy Labs</a></p>
+      <p style="margin-top: 10px; opacity: 0.8;">
+        <a href="/dashboard" style="color: white; margin: 0 10px;">Dashboard</a> |
+        <a href="https://github.com/ezra-anchovy/stripe-recovery-mvp" style="color: white; margin: 0 10px;">GitHub</a> |
+        <a href="mailto:ezra@anchovylabs.ai" style="color: white; margin: 0 10px;">Contact</a>
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    // ROI Calculator
+    const inputs = {
+      revenue: document.getElementById('revenue'),
+      avgPrice: document.getElementById('avgPrice'),
+      failRate: document.getElementById('failRate'),
+      recoveryRate: document.getElementById('recoveryRate')
+    };
+    
+    function calculate() {
+      const revenue = parseFloat(inputs.revenue.value) || 0;
+      const failRate = parseFloat(inputs.failRate.value) / 100 || 0;
+      const recoveryRate = parseFloat(inputs.recoveryRate.value) / 100 || 0;
+      
+      const lostRevenue = revenue * failRate;
+      const recoveredRevenue = lostRevenue * recoveryRate;
+      const baseCost = 19;
+      const performanceCost = recoveredRevenue * 0.05;
+      const totalCost = baseCost + performanceCost;
+      const netGain = recoveredRevenue - totalCost;
+      const annualGain = netGain * 12;
+      
+      document.getElementById('lostRevenue').textContent = '$' + lostRevenue.toFixed(0);
+      document.getElementById('recoveredRevenue').textContent = '$' + recoveredRevenue.toFixed(0);
+      document.getElementById('cost').textContent = '$' + totalCost.toFixed(0);
+      document.getElementById('netGain').textContent = '$' + netGain.toFixed(0);
+      document.getElementById('annualGain').textContent = '$' + annualGain.toFixed(0);
+    }
+    
+    Object.values(inputs).forEach(input => {
+      input.addEventListener('input', calculate);
+    });
+    
+    calculate(); // Initial calculation
+  </script>
+</body>
+</html>

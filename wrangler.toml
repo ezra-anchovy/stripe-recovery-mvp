@@ -1,0 +1,23 @@
+name = "stripe-recovery-mvp"
+main = "src/index.js"
+compatibility_date = "2024-01-01"
+
+[vars]
+ENVIRONMENT = "production"
+
+# Secrets to set via `wrangler secret put <KEY>`:
+# - STRIPE_WEBHOOK_SECRET
+# - TWILIO_ACCOUNT_SID
+# - TWILIO_AUTH_TOKEN
+# - TWILIO_WHATSAPP_NUMBER (format: whatsapp:+14155238886)
+# - OPENAI_API_KEY (or ANTHROPIC_API_KEY)
+# - DASHBOARD_API_KEY (for accessing dashboard API)
+
+[[d1_databases]]
+binding = "DB"
+database_name = "stripe_recovery"
+database_id = "placeholder" # Will be created during setup
+
+[[kv_namespaces]]
+binding = "KV"
+id = "placeholder" # Will be created during setup
